@@ -10,6 +10,7 @@ class FTXAPI : public ls::exchange::API
 		std::pair<int, double> getBuyOrderNumberAndMax(const std::string &coin) override;
 	protected:
 		std::string order(const std::string &coin, double price, double number, const std::string &side) override;
+		std::string getTimeStamp() override;
 };
 
 #endif

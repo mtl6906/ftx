@@ -77,3 +77,7 @@ pair<int, double> FTXAPI::getBuyOrderNumberAndMax(const string &coin)
 	return r;
 }
 
+std::string FTXAPI::getTimeStamp()
+{
+	return to_string(1000 * (time(NULL) + 14400));
+}
