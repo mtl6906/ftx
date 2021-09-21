@@ -37,7 +37,7 @@ string FTXAPI::order(const string &coin, double price, double number, const stri
 	json::api.push(root, "size", number);
 	json::api.push(root, "postOnly", true);
 	string body = root.toString();
-	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = to_string(time(NULL) * 1000), "POST", "/orders", body});
+	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = getTimeStamp(), "POST", "/orders", body});
 	return transacation("POST", "/api/orders", body, attribute);
 }
 
@@ -49,7 +49,7 @@ pair<int, double> FTXAPI::getBuyOrderNumberAndMax(const string &coin)
 	map<string, string> attribute;
 	attribute["FTX-KEY"] = config.apiKey;
 	string url = "/api/orders?market=" + coin;
-	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = to_string(1000 * time(NULL)), "GET", url, ""});
+	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = getTimeStamp(), "GET", url, ""});
 	auto responseText = transacation("GET", url, "", attribute);
 
 	json::Object root = json::api.decode(responseText);
