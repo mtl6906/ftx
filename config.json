@@ -1,0 +1,12 @@
+{
+	"apiKey": "get from ftx",
+	"secretKey": "get from ftx",
+	"ip": "ping apiURL to get ip",
+	"apiURL": "ftx.com/api",
+	"buyText": "buy",
+	"sellText": "sell",
+	"coin": "",
+	"number": 1,
+	"rate": 0.003,
+	"uprate": "0.007"
+}
