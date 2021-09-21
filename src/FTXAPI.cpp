@@ -37,7 +37,7 @@ string FTXAPI::order(const string &coin, double price, double number, const stri
 	json::api.push(root, "size", number);
 	json::api.push(root, "postOnly", true);
 	string body = root.toString();
-	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = getTimeStamp(), "POST", "/orders", body});
+	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = getTimeStamp(), "POST", "/api/orders", body});
 	return transacation("POST", "/api/orders", body, attribute);
 }
 
