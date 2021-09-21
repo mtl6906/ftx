@@ -7,7 +7,7 @@ using namespace ls;
 vector<double> FTXAPI::getPrices(const string &coin)
 {
 	vector<double> prices(2);
-	string text = transacation("GET", string("/markets/") + coin + "/orderbook?depth=1");
+	string text = transacation("GET", string("/api/markets/") + coin + "/orderbook?depth=1");
 	auto root = json::api.decode(text);
 	json::Object result;
 	json::Array bids;
@@ -38,7 +38,7 @@ string FTXAPI::order(const string &coin, double price, double number, const stri
 	json::api.push(root, "postOnly", true);
 	string body = root.toString();
 	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = to_string(time(NULL) * 1000), "POST", "/orders", body});
-	return transacation("POST", "/orders", body, attribute);
+	return transacation("POST", "/api/orders", body, attribute);
 }
 
 pair<int, double> FTXAPI::getBuyOrderNumberAndMax(const string &coin)
@@ -48,7 +48,7 @@ pair<int, double> FTXAPI::getBuyOrderNumberAndMax(const string &coin)
 	
 	map<string, string> attribute;
 	attribute["FTX-KEY"] = config.apiKey;
-	string url = "/orders?market=" + coin;
+	string url = "/api/orders?market=" + coin;
 	attribute["FTX-SIGN"] = signature({attribute["FTX-TS"] = to_string(1000 * time(NULL)), "GET", url, ""});
 	auto responseText = transacation("GET", url, "", attribute);
 
